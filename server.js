@@ -10,6 +10,7 @@ const openai = new OpenAI({ apiKey: process.env.OPEN_AI_KEY });
 
 app.use(cors());
 app.use(express.json()); 
+app.use(express.static('dist'));
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
 });

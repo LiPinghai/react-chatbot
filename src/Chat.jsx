@@ -49,7 +49,7 @@ const Default = () => {
             ))}
           </ul>
           <div className={'chat-input '+ (chatList.length ? 'chat-input-chated' : '' )}>
-            <input maxlength="500" rows="5" value={inputText} className='chat-text' type="text" onChange={(e)=>setInputText(e.target.value)} onKeyDown={handleKeyDown} placeholder="Ask me anything"/>
+            <input maxLength="500" rows="5" value={inputText} className='chat-text' type="text" onChange={(e)=>setInputText(e.target.value)} onKeyDown={handleKeyDown} placeholder="Ask me anything"/>
             <button className={'submit-button ' + (inputText ? 'inputed' : '')}  onClick={sendMessage}>↑</button>
           </div>
         </div>
