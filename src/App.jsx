@@ -1,7 +1,6 @@
 // App.tsx
 import './App.css'
-
-import Chat from './chat.jsx';
+import Chat from './Chat.jsx';
 
 function App() {
 
