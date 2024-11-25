@@ -27,7 +27,7 @@ const Default = () => {
         addChatItem({from:'self', content: question});
         setInputText('');
         
-        const response = await axios.post("http://localhost:3005/chatbot", {
+        const response = await axios.post("/chatbot/chat", {
           question,
         });
         addChatItem({from:'other', content: response.data});

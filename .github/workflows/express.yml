@@ -1,0 +1,43 @@
+name: Express site CI
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.x'
+      - run: npm ci
+      - run: npm run build
+
+      - name: Archive production artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: dist-site
+          path: _site
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment: tencent-light-server-blog
+    steps:
+    - name: Download site
+      uses: actions/download-artifact@v4.1.7
+      with:
+        name: dist-site
+        path: _site
+    - uses: matheusvanzan/sshpass-action@v2
+      with:
+        host: ${{ secrets.BLOG_HOST }}
+        user: ${{ secrets.BLOG_USER }}
+        pass: ${{ secrets.BLOG_PASSWORD }}
+    - run: |
+        sshpass -p '${{secrets.BLOG_PASSWORD}}' rsync ./_site/ -r -e 'ssh -o StrictHostKeyChecking=no' ${{secrets.BLOG_USER}}@${{secrets.BLOG_HOST}}:${{secrets.CHATBOT_PATH}}

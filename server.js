@@ -10,14 +10,14 @@ const openai = new OpenAI({ apiKey: process.env.OPEN_AI_KEY });
 
 app.use(cors());
 app.use(express.json()); 
-app.use(express.static('dist'));
+app.use('/chatbot', express.static('dist'));
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
 });
 
-// Here, we define the '/chatbot' route to handle questions from our 
+// Here, we define the '/chat' route to handle questions from our 
 // frontend React application
-app.post("/chatbot", async (req, res) => {
+app.post("/chatbot/chat", async (req, res) => {
 // The 'question' variable is the user's input from the frontend
   const { question } = req.body;
   // Here is where we communicate with the OpenAI API to create our chatbot.
