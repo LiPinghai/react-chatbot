@@ -40,4 +40,4 @@ jobs:
         user: ${{ secrets.BLOG_USER }}
         pass: ${{ secrets.BLOG_PASSWORD }}
     - run: |
-        sshpass -p '${{secrets.BLOG_PASSWORD}}' rsync ./chatbot/ -r -e 'ssh -o StrictHostKeyChecking=no' ${{secrets.BLOG_USER}}@${{secrets.BLOG_HOST}}:${{secrets.CHATBOT_PATH}}
+        sshpass -p '${{secrets.BLOG_PASSWORD}}' rsync ./dist/ -r -e 'ssh -o StrictHostKeyChecking=no' ${{secrets.BLOG_USER}}@${{secrets.BLOG_HOST}}:${{secrets.CHATBOT_PATH}}
