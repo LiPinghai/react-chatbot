@@ -3,9 +3,9 @@ name: Express site CI
 on:
   workflow_dispatch:
   push:
-    branches: [ master ]
+    branches: [ main ]
   pull_request:
-    branches: [ master ]
+    branches: [ main ]
 
 jobs:
   build:
@@ -23,7 +23,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: dist-site
-          path: _site
+          path: dist
   deploy:
     needs: build
     runs-on: ubuntu-latest
@@ -33,11 +33,11 @@ jobs:
       uses: actions/download-artifact@v4.1.7
       with:
         name: dist-site
-        path: _site
+        path: dist
     - uses: matheusvanzan/sshpass-action@v2
       with:
         host: ${{ secrets.BLOG_HOST }}
         user: ${{ secrets.BLOG_USER }}
         pass: ${{ secrets.BLOG_PASSWORD }}
     - run: |
-        sshpass -p '${{secrets.BLOG_PASSWORD}}' rsync ./_site/ -r -e 'ssh -o StrictHostKeyChecking=no' ${{secrets.BLOG_USER}}@${{secrets.BLOG_HOST}}:${{secrets.CHATBOT_PATH}}
+        sshpass -p '${{secrets.BLOG_PASSWORD}}' rsync ./chatbot/ -r -e 'ssh -o StrictHostKeyChecking=no' ${{secrets.BLOG_USER}}@${{secrets.BLOG_HOST}}:${{secrets.CHATBOT_PATH}}
