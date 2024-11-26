@@ -36,8 +36,8 @@ jobs:
         path: dist
     - uses: matheusvanzan/sshpass-action@v2
       with:
-        host: ${{ secrets.BLOG_HOST }}
-        user: ${{ secrets.BLOG_USER }}
-        pass: ${{ secrets.BLOG_PASSWORD }}
+        host: ${{ vars.HOST }}
+        user: ${{ vars.USER }}
+        pass: ${{ vars.PASSWORD }}
     - run: |
-        sshpass -p '${{secrets.BLOG_PASSWORD}}' rsync ./dist/ -r -e 'ssh -o StrictHostKeyChecking=no' ${{secrets.BLOG_USER}}@${{secrets.BLOG_HOST}}:${{secrets.CHATBOT_PATH}}
+        sshpass -p '${{vars.PASSWORD}}' rsync ./dist/ -r -e 'ssh -o StrictHostKeyChecking=no' ${{vars.USER}}@${{vars.HOST}}:${{vars.CHATBOT_PATH}}
