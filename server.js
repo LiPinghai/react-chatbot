@@ -38,7 +38,7 @@ app.post("/chatbot/chat", async (req, res) => {
       },
     ],
   // We choose the model we want to use for our chatbot
-    model: "gpt-3.5-turbo-0125",
+    model: process.env.GPT_VERSION,
   // We add a value for max_tokens to ensure the response won't exceed 300 tokens
   // This is to make sure the responses aren't too long
     max_tokens: 300,
