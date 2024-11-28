@@ -41,7 +41,7 @@ app.post("/chatbot/chat", async (req, res) => {
     model: process.env.GPT_VERSION,
   // We add a value for max_tokens to ensure the response won't exceed 300 tokens
   // This is to make sure the responses aren't too long
-    max_tokens: 300,
+    max_tokens: 1000,
   });
 // Then we take the text response and display it on the server
 // Note: This will only work once we set up our frontend logic
