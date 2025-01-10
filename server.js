@@ -10,7 +10,9 @@ const openai = new OpenAI({ apiKey: process.env.OPEN_AI_KEY });
 
 app.use(cors());
 app.use(express.json()); 
+// React frontend app static file service
 app.use('/chatbot', express.static('dist'));
+
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
 });
@@ -39,7 +41,7 @@ app.post("/chatbot/chat", async (req, res) => {
     ],
   // We choose the model we want to use for our chatbot
     model: process.env.GPT_VERSION,
-  // We add a value for max_tokens to ensure the response won't exceed 300 tokens
+  // We add a value for max_tokens to ensure the response won't exceed 1000 tokens
   // This is to make sure the responses aren't too long
     max_tokens: 1000,
   });

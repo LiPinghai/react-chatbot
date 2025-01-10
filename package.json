@@ -1,13 +1,13 @@
 {
   "name": "react-chatbot",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.0.1",
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "lint": "eslint .",
     "server": "node server.js",
+    "lint": "eslint .",
     "preview": "vite preview"
   },
   "dependencies": {
